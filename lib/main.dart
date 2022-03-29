@@ -36,6 +36,20 @@ class MyApp extends StatelessWidget {
                       fontWeight: FontWeight.w900,
                     ),
                   ),
+                  headline3: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  headline4: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   button: GoogleFonts.poppins(
                     textStyle: TextStyle(
                       color: Colors.purple.shade900,
