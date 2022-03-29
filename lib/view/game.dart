@@ -1,5 +1,7 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:tictactoe/view/widgets/game_board.dart';
 import 'package:tictactoe/view/widgets/score_board.dart';
@@ -25,10 +27,11 @@ class Game extends StatelessWidget {
                 const ScoreBoard(),
                 SizedBox(height: 40.h),
                 const Expanded(child: GameBoard()),
-                GestureDetector(
-                  onTap: () {
+                BouncingWidget(
+                  onPressed: () {
                     Provider.of<TicTacToeProvider>(context, listen: false).startOver();
                   },
+                  scaleFactor: 2,
                   child: Container(
                     height: 40.h,
                     width: 170.w,
@@ -44,6 +47,14 @@ class Game extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Lottie.asset(
+              "assets/lottie/fireworks.json",
+              width: 360.w,
+              fit: BoxFit.fitWidth,
             ),
           ),
           Positioned(

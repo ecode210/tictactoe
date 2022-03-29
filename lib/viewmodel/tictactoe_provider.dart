@@ -52,11 +52,15 @@ class TicTacToeProvider extends ChangeNotifier {
 
   // Restarts the game after a win or draw
   void playAgain({required String winningCell}) {
-    if (winningCell == "X") {
-      playerXScore++;
-    } else if (winningCell == "O") {
-      playerOScore++;
+    switch (winningCell) {
+      case "X":
+        playerXScore++;
+        break;
+      case "O":
+        playerOScore++;
+        break;
     }
+
     Timer(
       const Duration(seconds: 2),
       () {
@@ -71,7 +75,7 @@ class TicTacToeProvider extends ChangeNotifier {
 
   // Checks all possible outcomes for a win or draw
   void checkGameOver() {
-    // Checking rows
+    // Checking if there's a win on the rows
     if (gameBoardCells[0] == gameBoardCells[1] && gameBoardCells[0] == gameBoardCells[2] && gameBoardCells[0] != '') {
       playAgain(winningCell: gameBoardCells[0]);
     }
@@ -82,7 +86,7 @@ class TicTacToeProvider extends ChangeNotifier {
       playAgain(winningCell: gameBoardCells[6]);
     }
 
-    // Checking Column
+    // Checking if there's a win on the columns
     if (gameBoardCells[0] == gameBoardCells[3] && gameBoardCells[0] == gameBoardCells[6] && gameBoardCells[0] != '') {
       playAgain(winningCell: gameBoardCells[0]);
     }
@@ -93,13 +97,16 @@ class TicTacToeProvider extends ChangeNotifier {
       playAgain(winningCell: gameBoardCells[2]);
     }
 
-    // Checking Diagonal
+    // Checking if there's a win diagonally
     if (gameBoardCells[0] == gameBoardCells[4] && gameBoardCells[0] == gameBoardCells[8] && gameBoardCells[0] != '') {
       playAgain(winningCell: gameBoardCells[0]);
     }
     if (gameBoardCells[2] == gameBoardCells[4] && gameBoardCells[2] == gameBoardCells[6] && gameBoardCells[2] != '') {
       playAgain(winningCell: gameBoardCells[2]);
-    } else if (occupiedCells == 9) {
+    }
+
+    // Checking if there is a draw
+    if (occupiedCells == 9) {
       playAgain(winningCell: "DRAW");
     }
   }

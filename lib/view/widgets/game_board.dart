@@ -17,7 +17,6 @@ class GameBoard extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               Provider.of<TicTacToeProvider>(context, listen: false).play(index: index);
-              print('tap');
             },
             child: Consumer<TicTacToeProvider>(
               builder: (context, ttc, child) {
