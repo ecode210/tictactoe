@@ -24,14 +24,16 @@ class Game extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Displays the scores
                 const ScoreBoard(),
                 SizedBox(height: 40.h),
+                // Displays the game board
                 const Expanded(child: GameBoard()),
                 BouncingWidget(
                   onPressed: () {
                     Provider.of<TicTacToeProvider>(context, listen: false).startOver();
                   },
-                  scaleFactor: 2,
+                  scaleFactor: 0.5,
                   child: Container(
                     height: 40.h,
                     width: 170.w,
@@ -49,13 +51,20 @@ class Game extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 0,
-            child: Lottie.asset(
-              "assets/lottie/fireworks.json",
-              width: 360.w,
-              fit: BoxFit.fitWidth,
-            ),
+          // Plays animation on player win
+          Consumer<TicTacToeProvider>(
+            builder: (context, ttc, child) {
+              return Positioned(
+                bottom: 0,
+                child: ttc.winningAnimation
+                    ? Lottie.asset(
+                        "assets/lottie/fireworks.json",
+                        width: 360.w,
+                        fit: BoxFit.fitWidth,
+                      )
+                    : const SizedBox(),
+              );
+            },
           ),
           Positioned(
             bottom: -150,

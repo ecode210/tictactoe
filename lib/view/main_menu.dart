@@ -24,6 +24,18 @@ class MainMenu extends StatelessWidget {
                   height: 150.h,
                   width: 150.w,
                   fit: BoxFit.contain,
+                  placeholderBuilder: (context) {
+                    return Container(
+                      height: 150.h,
+                      width: 150.w,
+                      padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 52.h),
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        backgroundColor: Colors.black.withOpacity(0.1),
+                        strokeWidth: 5.w,
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 50.h),
                 GestureDetector(

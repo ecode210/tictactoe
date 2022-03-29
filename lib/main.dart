@@ -14,9 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Added Custom screen size for adaptive widgets
     return ScreenUtilInit(
       designSize: const Size(360, 640),
       builder: () {
+        // Injected TicTacToeProvider into the widget tree
         return MultiProvider(
           providers: [
             ChangeNotifierProvider.value(

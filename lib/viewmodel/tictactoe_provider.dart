@@ -22,11 +22,15 @@ class TicTacToeProvider extends ChangeNotifier {
   int playerXScore = 0;
   // Cells that are filled
   int occupiedCells = 0;
+  // Toggles animation for win
+  bool winningAnimation = false;
 
   // Allows player to make a move and detect if there's a winner
   void play({required int index}) {
+    // Alternate player's turn
     playerTurn = !playerTurn;
 
+    // Detects whether it's Player X's turn or Player O's turn
     if (gameBoardCells[index] == "" && playerTurn) {
       gameBoardCells[index] = "O";
       occupiedCells++;
@@ -41,9 +45,11 @@ class TicTacToeProvider extends ChangeNotifier {
 
   // Clear the score and start the game over
   void startOver() {
+    // Iterates through all cells and resets it
     for (int i = 0; i < 9; i++) {
       gameBoardCells[i] = "";
     }
+    // Resets all player data
     playerXScore = 0;
     playerOScore = 0;
     occupiedCells = 0;
@@ -52,21 +58,28 @@ class TicTacToeProvider extends ChangeNotifier {
 
   // Restarts the game after a win or draw
   void playAgain({required String winningCell}) {
+    // Increment player score and play winning animation
     switch (winningCell) {
       case "X":
         playerXScore++;
+        winningAnimation = true;
+        notifyListeners();
         break;
       case "O":
         playerOScore++;
+        winningAnimation = true;
+        notifyListeners();
         break;
     }
 
+    // Resets game board after 2 second delay
     Timer(
       const Duration(seconds: 2),
       () {
         for (int i = 0; i < 9; i++) {
           gameBoardCells[i] = "";
         }
+        winningAnimation = false;
         occupiedCells = 0;
         notifyListeners();
       },

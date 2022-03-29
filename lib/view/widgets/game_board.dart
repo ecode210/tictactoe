@@ -1,3 +1,4 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +15,11 @@ class GameBoard extends StatelessWidget {
         itemCount: 9,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
+          return BouncingWidget(
+            onPressed: () {
               Provider.of<TicTacToeProvider>(context, listen: false).play(index: index);
             },
+            scaleFactor: 0.5,
             child: Consumer<TicTacToeProvider>(
               builder: (context, ttc, child) {
                 return Container(
